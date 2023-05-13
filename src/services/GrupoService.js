@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Grupo_API_BASE_URL = "http://localhost:8080/api";
+const Grupo_API_BASE_URL = "http://localhost:8090/api";
 
 export const cargarActividades = async (idGrupo,sucessCallback, errorCallback) => {
    const options = {

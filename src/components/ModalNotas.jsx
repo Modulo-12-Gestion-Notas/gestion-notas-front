@@ -15,25 +15,20 @@ const ModalNotas = ({ idGrupo }) => {
   const handleClose = () => setLgShow(false);
   const handleShow = () => setLgShow(true);
   const [rows, setRows] = useState([]);
-  const [porcentaje, setPorcentaje] = useState(
-    rows
-      .map((item) => parseFloat(item.porcentaje))
-      .reduce((acc, curr) => parseFloat(acc) + parseFloat(curr), 0)
-  );
 
   useEffect(() => {
     const fetchEstudiantes = async () => {
       await cargarEstudiantes(
         idGrupo,
         (response) => {
-          setRows(response.data);
+          setRows(response.data.estudianteList);
         },
         (error) => {
           console.error(error);
         }
       );
     };
-    //fetchEstudiantes();
+    fetchEstudiantes();
   }, []);
 
   const addRow = () => {
@@ -60,11 +55,6 @@ const ModalNotas = ({ idGrupo }) => {
     const newRows = [...rows];
     newRows[index][key] = event.target.value;
     setRows(newRows);
-    setPorcentaje(
-      rows
-        .map((item) => parseFloat(item.porcentaje))
-        .reduce((acc, curr) => parseFloat(acc) + parseFloat(curr), 0)
-    );
   };
 
   const saveRows = async () => {
@@ -96,30 +86,33 @@ const ModalNotas = ({ idGrupo }) => {
   return (
     <>
       <Button className="btn btn-info" onClick={handleShow}>
-        Agregar actividad
+        Ver Estudiantes
       </Button>
       <Modal
         size="lg"
         show={lgShow}
         onHide={handleClose}
         aria-labelledby="example-modal-sizes-title-lg"
+        scrollable={true}
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            ACTIVIDADES EVALUATIVAS
-            <h1>grupo: {idGrupo}</h1>
+            ESTUDIANTES DEL GRUPO {idGrupo}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <button onClick={addRow}>Agregar Actividad +</button>
           <ToastContainer />
           <table>
             <thead>
               <tr>
                 <th style={{ display: "none" }}>Id</th>
-                <th>Concepto</th>
-                <th>Porcentaje</th>
-                <th></th>
+                <th>numero documento</th>
+                <th>nombre</th>
+                <th>correo</th>
+                <th>seccional</th>
+                <th>nota1</th>
+                <th>nota2</th>
+                <th>nota3</th>
               </tr>
             </thead>
             <tbody>
@@ -130,62 +123,60 @@ const ModalNotas = ({ idGrupo }) => {
                       type="number"
                       value={row.id ? row.id : null}
                       onChange={(event) => handleChange(event, index, "id")}
+                      disabled
                     />
                   </td>
                   <td>
                     <input
                       type="text"
-                      value={row.concepto}
+                      value={row.numDocumento}
                       onChange={(event) =>
-                        handleChange(event, index, "concepto")
+                        handleChange(event, index, "numDocumento")
                       }
+                      disabled
                     />
                   </td>
                   <td>
                     <input
                       type="text"
-                      value={row.porcentaje}
+                      value={row.nombre + " " + row.apellido}
                       onChange={(event) => {
-                        handleChange(event, index, "porcentaje");
-                        validarPorcentaje(row.porcentaje);
+                        handleChange(event, index, "nombre");
                       }}
+                      disabled
                     />
                   </td>
                   <td>
-                    <ModalAceptar
-                      functionAcept={deleteRow}
-                      legendButton={"Eliminar"}
-                      message={`¿Desea Eliminar la actividad: ${row.concepto}?`}
-                      heading={"Eliminar Actividad"}
-                      confirmationButon={"Eliminar"}
-                      cancelButton={"Cancelar"}
-                      params={{
-                        index: index,
-                        tieneNotas: row.tieneNotas,
+                    <input
+                      type="text"
+                      value={row.correoInstitucional}
+                      onChange={(event) => {
+                        handleChange(event, index, "correoInstitucional");
                       }}
-                      colorButton={"red"}
-                      colorButtonModal={"red"}
-                      buttonDisable={false}
+                      disabled
                     />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.seccional}
+                      onChange={(event) => {
+                        handleChange(event, index, "seccional");
+                      }}
+                      disabled
+                    />
+                  </td>
+                  <td>
+                    <input type="number" />
+                  </td>
+                  <td>
+                    <input type="number" />
+                  </td>
+                  <td>
+                    <input type="number" />
                   </td>
                 </tr>
               ))}
-              <tr>
-                <span>
-                  Total:
-                  {porcentaje > 100 ? (
-                    <div>
-                      <br />
-                      <span style={{ color: "red" }}>
-                        {toast.error(`el porcentaje total no es permitido`)}
-                        los porcentajes suman más de 100%
-                      </span>
-                    </div>
-                  ) : (
-                    porcentaje + "%"
-                  )}
-                </span>
-              </tr>
             </tbody>
           </table>
         </Modal.Body>
@@ -202,7 +193,7 @@ const ModalNotas = ({ idGrupo }) => {
             cancelButton={"Cancelar"}
             colorButtonModal={"green"}
             colorButton={"blue"}
-            buttonDisable={porcentaje > 100 ? true : false}
+            buttonDisable={false}
           />
         </Modal.Footer>
       </Modal>

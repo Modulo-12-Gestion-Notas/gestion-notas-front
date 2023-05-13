@@ -58,6 +58,7 @@ class ListGrupoComponent extends Component {
               <th>ubicacion</th>
               <th>total de estudiantes</th>
               <th>Actividades Evaluativas</th>
+              <th>Ver Estudiantes</th>
             </tr>
           </thead>
 
@@ -74,6 +75,9 @@ class ListGrupoComponent extends Component {
                 <td> {grup.totalEstudiantes}</td>
                 <td>
                   <ModalActEval idGrupo={grup.codigoGrupo} />
+                </td>
+                <td>
+                  <ModalNotas idGrupo={grup.codigoGrupo} />
                 </td>
               </tr>
             ))}
