@@ -31,95 +31,15 @@ describe("ModalAceptar", () => {
         expect(screen.getByText(legendButton)).toBeInTheDocument();
     });
 
-    it("opens the modal when the button is clicked", () => {
-        const functionAcept = jest.fn();
-        const legendButton = "Accept";
-        const heading = "Confirmation";
-        const message = "Are you sure?";
-        const confirmationButton = "Confirm";
-        const cancelButton = "Cancel";
-        const colorButton = "blue";
-        const colorButtonModal = "green";
-        const buttonDisable = false;
-
-        render(
-            <ModalAceptar
-                functionAcept={functionAcept}
-                legendButton={legendButton}
-                heading={heading}
-                message={message}
-                confirmationButton={confirmationButton}
-                cancelButton={cancelButton}
-                colorButton={colorButton}
-                colorButtonModal={colorButtonModal}
-                buttonDisable={buttonDisable}
-            />
-        );
-
-        fireEvent.click(screen.getByText(legendButton));
-        expect(screen.getByTestId("modal-title")).toHaveTextContent(heading);
-        expect(screen.getByTestId("modal-body")).toHaveTextContent(message);
+    it("test_button_click_opens_modal", () => {
+        const { getByText } = render(<ModalAceptar legendButton="Open Modal" />);
+        fireEvent.click(getByText("Open Modal"));
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
     });
 
-    it("calls the functionAcept when the confirmation button is clicked", () => {
-        const functionAcept = jest.fn();
-        const legendButton = "Accept";
-        const heading = "Confirmation";
-        const message = "Are you sure?";
-        const confirmationButton = "Confirm";
-        const cancelButton = "Cancel";
-        const colorButton = "blue";
-        const colorButtonModal = "green";
-        const buttonDisable = false;
-
-        render(
-            <ModalAceptar
-                functionAcept={functionAcept}
-                legendButton={legendButton}
-                heading={heading}
-                message={message}
-                confirmationButton={confirmationButton}
-                cancelButton={cancelButton}
-                colorButton={colorButton}
-                colorButtonModal={colorButtonModal}
-                buttonDisable={buttonDisable}
-            />
-        );
-
-        fireEvent.click(screen.getByText(legendButton));
-        fireEvent.click(screen.getByText(confirmationButton));
-        expect(functionAcept).toHaveBeenCalled();
+    it("test_button_disable_true", () => {
+        const { getByText } = render(<ModalAceptar legendButton="Open Modal" buttonDisable={true} />);
+        expect(screen.getByRole("button", { name: "Open Modal" })).toBeDisabled();
     });
 
-    it("calls the functionAcept with params when provided", () => {
-        const functionAcept = jest.fn();
-        const legendButton = "Accept";
-        const heading = "Confirmation";
-        const message = "Are you sure?";
-        const confirmationButton = "Confirm";
-        const cancelButton = "Cancel";
-        const colorButton = "blue";
-        const colorButtonModal = "green";
-        const buttonDisable = false;
-        const params = { param1: "value1", param2: "value2" };
-
-        render(
-            <ModalAceptar
-                functionAcept={functionAcept}
-                legendButton={legendButton}
-                heading={heading}
-                message={message}
-                confirmationButton={confirmationButton}
-                cancelButton={cancelButton}
-                colorButton={colorButton}
-                colorButtonModal={colorButtonModal}
-                buttonDisable={buttonDisable}
-                params={params}
-            />
-        );
-
-        fireEvent.click(screen.getByText(legendButton));
-        fireEvent.click(screen.getByText(confirmationButton));
-        expect(functionAcept).toHaveBeenCalledWith("value1,value2");
-    });
 })

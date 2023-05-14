@@ -4,7 +4,7 @@ import ListGrupoComponent from './components/ListGrupoComponent';
 
 function App() {
   return (
-    <div class Name="container">
+    <div className="container">
       <ListGrupoComponent/>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ModalNotas from "./ModalNotas";
+import ModalNotas from "../components/ModalNotas";
 
 describe("ModalNotas", () => {
   test("renders ModalNotas component", () => {
