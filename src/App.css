@@ -1,0 +1,18 @@
+body{
+    background-color:azure;
+}
+
+header{
+    text-align: center;
+    background-color:  #45c643;
+    width: 100%;
+    padding: 0; 
+    margin: 0;
+}
+
+h1{
+    padding: 20px;
+    margin:0px;
+    color: white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
