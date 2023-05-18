@@ -7,6 +7,7 @@
     border-radius: 12px;
     position: absolute;
     width: 60%;
+    height: 100%;
     top: 30px;
     left: calc(35% - 200px);
     bottom: 30px;
@@ -20,9 +21,8 @@
     padding: 10px;
     text-align: center;
     border: 2px solid #444;
-    margin-left: 28vw;
+    margin-left: 100px;
     cursor: pointer;
-    margin-right: -40px;
     transition: all 300ms ease;
 }
 
@@ -30,4 +30,5 @@
     background-color: #000;
     color: azure;
 }
+
 
