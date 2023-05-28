@@ -40,17 +40,21 @@ describe('ListGrupoComponent_class', () => {
         ];
         const mockGetGrupoById = jest.spyOn(GrupoService, "getGrupoById").mockImplementation(() => Promise.resolve({data: mockGrupo}));
         const {getByLabelText, getByText} = render(<ListGrupoComponent/>);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const input = getByLabelText("ID de profesor:");
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const button = getByText("Buscar");
 
         // Act
         fireEvent.change(input, {target: {value: "123"}});
         fireEvent.click(button);
         await waitFor(() => expect(mockGetGrupoById).toHaveBeenCalledWith("123"));
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const codigoCurso = () => getByText((content, element) => {
             const hasText = (text) => element => element.textContent === text
             const codigoCurso = hasText('Curso 1')
             const nombreCurso = hasText('Curso 1')
+            // eslint-disable-next-line testing-library/no-node-access
             const childrenDontHaveText = Array.from(element.children).every(child => !codigoCurso(child.textContent) && !nombreCurso(child.textContent))
             return hasText(content)(element) && childrenDontHaveText
         })
@@ -60,14 +64,18 @@ describe('ListGrupoComponent_class', () => {
         // Arrange
         const mockGetGrupoById = jest.spyOn(GrupoService, "getGrupoById").mockImplementation(() => Promise.resolve({ data: [] }));
         const { getByLabelText, getByText, queryByText } = render(<ListGrupoComponent />);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const input = getByLabelText("ID de profesor:");
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const button = getByText("Buscar");
 
         // Act
         fireEvent.change(input, { target: { value: "invalid" } });
         fireEvent.click(button);
         await waitFor(() => expect(mockGetGrupoById).toHaveBeenCalledWith("invalid"));
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const codigoCurso = queryByText("Curso 1");
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const nombreGrupo = queryByText("Grupo 1");
 
         // Assert
@@ -82,14 +90,18 @@ describe('ListGrupoComponent_class', () => {
         // Arrange
         const mockGetGrupoById = jest.spyOn(GrupoService, "getGrupoById").mockImplementation(() => Promise.resolve({ data: [] }));
         const { getByLabelText, getByText, queryByText } = render(<ListGrupoComponent />);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const input = getByLabelText("ID de profesor:");
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const button = getByText("Buscar");
 
         // Act
         fireEvent.change(input, { target: { value: "123" } });
         fireEvent.click(button);
         await waitFor(() => expect(mockGetGrupoById).toHaveBeenCalledWith("123"));
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const codigoCurso = queryByText("Curso 1");
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const nombreGrupo = queryByText("Grupo 1");
 
         // Assert
@@ -103,6 +115,7 @@ describe('ListGrupoComponent_class', () => {
     it("test_modal_act_eval_rendered_correctly", () => {
         // Arrange
         const { getByText } = render(<ListGrupoComponent />);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const modalButton = getByText("Actividades Evaluativas");
 
         // Act
@@ -115,6 +128,7 @@ describe('ListGrupoComponent_class', () => {
     it("test_change_id_professor_input_field", () => {
         // Arrange
         const { getByLabelText } = render(<ListGrupoComponent />);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         const input = getByLabelText("ID de profesor:");
 
         // Act

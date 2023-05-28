@@ -33,6 +33,7 @@ describe("ModalAceptar", () => {
 
     it("test_button_click_opens_modal", () => {
         const { getByText } = render(<ModalAceptar legendButton="Open Modal" />);
+        // eslint-disable-next-line testing-library/prefer-screen-queries
         fireEvent.click(getByText("Open Modal"));
         expect(screen.getByRole("dialog")).toBeInTheDocument();
     });
