@@ -50,6 +50,8 @@ const ModalActEval = ({ idGrupo }) => {
   };
 
   const deleteRow = (index, notasAsociadas) => {
+    console.log(index)
+    console.log(notasAsociadas)
     if (notasAsociadas === true) {
       alert("La actividad cuenta con notas asociadas");
       return;
@@ -130,6 +132,7 @@ const ModalActEval = ({ idGrupo }) => {
               {rows.map((row, index) => (
                 <tr key={index}>
                   <td style={{ display: "none" }}>
+                    
                     <input
                       type="number"
                       value={row.id ? row.id : null}

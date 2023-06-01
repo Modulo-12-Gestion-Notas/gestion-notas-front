@@ -28,6 +28,14 @@ export const cargarActividades = async (idGrupo,sucessCallback, errorCallback) =
   await axios.request(options).then(sucessCallback).catch(errorCallback);
 };
 
+export const cargarEstudianteInfo = async (idEstudiante,sucessCallback, errorCallback) => {
+  const options = {
+    method: "GET",
+    url: `${Grupo_API_BASE_URL}/estudiantes/${idEstudiante}/mis-notas/`,
+  };
+  await axios.request(options).then(sucessCallback).catch(errorCallback);
+};
+
 export const cargarEstudiantesNotas = async (idGrupo,sucessCallback, errorCallback) => {
   const options = {
     method: "GET",

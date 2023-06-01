@@ -19,7 +19,7 @@ const ModalAceptar = ({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleFunction = () => {
-    params ? functionAcept(Object.values(params).join(",")) : functionAcept();
+    params ? functionAcept(params.index,params.tieneNotas) : functionAcept();
   };
   return (
     <>
