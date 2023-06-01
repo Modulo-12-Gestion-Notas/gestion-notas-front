@@ -1,7 +1,7 @@
 import './App.css'
 import { useState } from 'react';
 import GroupButton from './components/GroupButton'
-import estudiantes from './data/estudiantes'
+import estudiantes from './data/estudiantes' 
 function App() {
 
   const [showModal, setShowModal] = useState(false);

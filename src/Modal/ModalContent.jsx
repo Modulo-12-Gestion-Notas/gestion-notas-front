@@ -3,7 +3,11 @@ import "../data/estudiantes.js"
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 import estudiantes from "../data/estudiantes.js";
 
-let numberGroup = estudiantes.findIndex(estudianteN => estudianteN.numero = estudiantes.numeroGrupo)
+let url = "https://jsonplaceholder.typicode.com/users"
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch (error => console.log(error))
 
 export default function ModalContent({ onClose }) {
   return (
@@ -14,7 +18,6 @@ export default function ModalContent({ onClose }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
               <TableCell>Id</TableCell>
               <TableCell>Nombres y apellidos</TableCell>
               <TableCell>E-mail</TableCell>
@@ -25,7 +28,6 @@ export default function ModalContent({ onClose }) {
           <TableBody>
             {estudiantes.map(celda => (
               <TableRow>
-                <TableCell>{celda.numero}</TableCell>
                 <TableCell>{celda.id}</TableCell>
                 <TableCell>{celda.nombresYApellidos}</TableCell>
                 <TableCell>{celda.email}</TableCell>
